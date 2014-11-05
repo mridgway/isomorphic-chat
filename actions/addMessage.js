@@ -1,5 +1,5 @@
 var dispatcher = require('../lib/dispatcher');
-var i = require('../data/messages').length;
+var i = 7;
 
 module.exports = function (payload) {
     var message = payload;

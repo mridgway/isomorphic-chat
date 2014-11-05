@@ -10,20 +10,24 @@ var ChatApp = React.createFactory(require('./components/ChatApp.jsx'));
 var showMessages= require('./actions/showMessages');
 
 server.get('/', function (req, res, next) {
-    showMessages();
+    showMessages({}, function (err) {
+        if (err) {
+            next(err);
+            return;
+        }
+        var html = React.renderToString(ChatApp());
 
-    var html = React.renderToString(ChatApp());
-
-    res.write('<html>');
-    res.write('<head>');
-    res.write('<title>Chat</title>');
-    res.write('</head>');
-    res.write('<body>');
-    res.write('<div id="app">' + html + '</div>');
-    res.write('</body>');
-    res.write('<script src="/build/js/client.js"></script>')
-    res.write('</html>');
-    res.end();
+        res.write('<html>');
+        res.write('<head>');
+        res.write('<title>Chat</title>');
+        res.write('</head>');
+        res.write('<body>');
+        res.write('<div id="app">' + html + '</div>');
+        res.write('</body>');
+        res.write('<script src="/build/js/client.js"></script>')
+        res.write('</html>');
+        res.end();
+    });
 });
 
 

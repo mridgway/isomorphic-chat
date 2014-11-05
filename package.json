@@ -15,7 +15,8 @@
     "flux": "^2.0.1",
     "node-jsx": "^0.12.0",
     "object-assign": "^1.0.0",
-    "react": "^0.12.0"
+    "react": "^0.12.0",
+    "superagent": "^0.20.0"
   },
   "devDependencies": {
     "jsx-loader": "^0.12.1",
