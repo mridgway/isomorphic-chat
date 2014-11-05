@@ -3,7 +3,7 @@ var addMessage = require('../actions/addMessage');
 
 var AttentionButton = React.createClass({
     onClick: function () {
-        addMessage({
+        addMessage(this.props.dispatcher, {
             authorName: 'Mike',
             text: 'Look at me!'
         });

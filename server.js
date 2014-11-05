@@ -5,17 +5,21 @@ var express = require('express');
 var React = require('react');
 var server = express();
 server.use(express.static('./'));
+var Dispatcher = require('./lib/dispatcher');
 
 var ChatApp = React.createFactory(require('./components/ChatApp.jsx'));
 var showMessages= require('./actions/showMessages');
 
 server.get('/', function (req, res, next) {
-    showMessages({}, function (err) {
+    var dispatcher = new Dispatcher();
+    showMessages(dispatcher, {}, function (err) {
         if (err) {
             next(err);
             return;
         }
-        var html = React.renderToString(ChatApp());
+        var html = React.renderToString(ChatApp({
+            dispatcher: dispatcher
+        }));
 
         res.write('<html>');
         res.write('<head>');

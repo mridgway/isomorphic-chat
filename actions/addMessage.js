@@ -1,12 +1,8 @@
-var dispatcher = require('../lib/dispatcher');
 var i = 7;
 
-module.exports = function (payload) {
+module.exports = function (dispatcher, payload) {
     var message = payload;
     message.id = 'm_' + ++i;
     message.timestamp = Date.now();
-    dispatcher.dispatch({
-        type: 'ADD_MESSAGE',
-        message: message
-    });
+    dispatcher.dispatch('ADD_MESSAGE', message);
 };

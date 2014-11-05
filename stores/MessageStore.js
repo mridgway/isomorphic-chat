@@ -1,41 +1,35 @@
-var dispatcher = require('../lib/dispatcher');
 var objectAssign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 
-var messages = [];
-var MessageStore = objectAssign({}, EventEmitter.prototype, {
+function MessageStore() {
+    this.messages = [];
+}
+MessageStore.storeName = 'MessageStore';
+MessageStore.handlers = {
+    'RECEIVE_MESSAGES': 'onReceiveMessages',
+    'ADD_MESSAGE': 'onAddMessage'
+};
+
+objectAssign(MessageStore.prototype, EventEmitter.prototype, {
     onAddMessage: function (message) {
-        messages.push(message);
-        MessageStore.emitChange();
+        this.messages.push(message);
+        this.emitChange();
     },
     onReceiveMessages: function (msgs) {
-        messages = messages.concat(msgs);
-        MessageStore.emitChange();
+        this.messages = this.messages.concat(msgs);
+        this.emitChange();
     },
     emitChange: function () {
-        MessageStore.emit('change');
+        this.emit('change');
     },
     getAllMessages: function () {
-        return messages;
+        return this.messages;
     },
     addChangeListener: function (listener) {
-        MessageStore.on('change', listener);
+        this.on('change', listener);
     },
     removeChangeListener: function (listener) {
-        MessageStore.removeListener(listener);
-    }
-});
-
-dispatcher.register(function (payload) {
-    switch (payload.type) {
-        case 'RECEIVE_MESSAGES':
-            MessageStore.onReceiveMessages(payload.messages);
-            return;
-        case 'ADD_MESSAGE':
-            MessageStore.onAddMessage(payload.message);
-            return;
-        default:
-            throw new Error('No handler found');
+        this.removeListener(listener);
     }
 });
 
