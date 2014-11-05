@@ -1,0 +1,22 @@
+{
+  "name": "reactMeetup",
+  "version": "0.1.0",
+  "description": "My talk on Isomorphic Fux for React meetup",
+  "main": "server.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack; open index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Ridgway",
+  "license": "BSD",
+  "dependencies": {
+    "flux": "^2.0.1",
+    "object-assign": "^1.0.0",
+    "react": "^0.12.0"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.12.1",
+    "webpack": "^1.4.12"
+  }
+}
