@@ -30,6 +30,14 @@ objectAssign(MessageStore.prototype, EventEmitter.prototype, {
     },
     removeChangeListener: function (listener) {
         this.removeListener(listener);
+    },
+    dehydrate: function () {
+        return {
+            messages: this.messages
+        }
+    },
+    rehydrate: function (state) {
+        this.messages = state.messages;
     }
 });
 
