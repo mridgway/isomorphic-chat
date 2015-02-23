@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack; node server",
+    "start": "npm run build && node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael Ridgway",
